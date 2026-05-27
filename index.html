@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlackBlue Studios | Roster</title>
+    <title>BlackBlue Studios | Portal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,22 +33,22 @@
         overflow-x: hidden;
       }
       
-      /* Gritty Tarkov-like dark atmospheric background */
+      /* Pure immersive dark atmospheric look */
       .bg-vignette {
-        background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
+        background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.95) 100%);
       }
 
-      /* Noise texture to make background feel gritty and high-quality */
+      /* Subtle noise simulation covering the viewport (Tarkov aesthetic styling) */
       .dust-overlay {
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         opacity: 0.025;
         pointer-events: none;
       }
 
-      /* Roster rows list premium style */
+      /* Clean minimalist roster rows with ambient glowing transition states */
       .roster-row {
         position: relative;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .roster-row::after {
         content: '';
@@ -57,7 +57,7 @@
         left: 0;
         width: 100%;
         height: 1px;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
         transition: background 0.3s ease;
       }
       .roster-row:hover::after {
@@ -67,258 +67,531 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-purple-900/40 relative">
 
-    <!-- Interactive Background Graphic Layer (Optimized Translate / Scale for Blur Parallax) -->
-    <div class="fixed inset-0 w-[110%] h-[110%] -left-[5%] -top-[5%] z-0 pointer-events-none overflow-hidden">
-        <!-- background.png loaded here. We default back to a beautiful dark state if not yet uploaded -->
-        <div id="parallaxBg" class="w-full h-full bg-cover bg-center filter blur-[6px] brightness-[0.35] contrast-[1.1] transition-transform duration-75 ease-out" 
-             style="background-image: url('./background.png'), linear-gradient(to bottom, #050508, #000000);">
+    <!-- Ambient Grid & Interactive Background Graphic Layer (Optimized for mouse drift) -->
+    <div class="fixed inset-0 w-[112%] h-[112%] -left-[6%] -top-[6%] z-0 pointer-events-none overflow-hidden">
+        <!-- Parallax Container pointing to the design assets or default dark cosmic linear grids -->
+        <div id="parallaxBg" class="w-full h-full bg-cover bg-center filter blur-[8px] brightness-[0.35] contrast-[1.1] transition-transform duration-75 ease-out" 
+             style="background-image: url('./background.png'), url('./background.jpg'), linear-gradient(to bottom, #06060c, #000000);">
         </div>
-        <!-- Absolute dark vignette and noise simulation filters for Tarkov vibe -->
         <div class="absolute inset-0 bg-vignette"></div>
         <div class="absolute inset-0 dust-overlay"></div>
     </div>
 
-    <!-- Main Content Grid -->
+    <!-- Main Content Layout Portal -->
     <div class="relative z-10 flex flex-col min-h-screen justify-between">
         
-        <!-- Header Spot (Logo-Focused) -->
-        <header class="w-full max-w-4xl mx-auto px-6 pt-10 pb-6 flex justify-center items-center">
-            <!-- logo.png display with smart fallback if the file doesn't exist yet -->
-            <div class="flex flex-col items-center">
-                <img src="./logo.png" alt="BlackBlue Studios" class="h-12 md:h-16 w-auto object-contain mb-3 opacity-95 hover:opacity-100 transition-opacity duration-300" onError="this.style.display='none'; document.getElementById('logoFallback').style.display='block';">
-                <!-- Textual fallback only triggered when image source doesn't load/exist -->
-                <span id="logoFallback" class="hidden text-xl font-bold tracking-[0.25em] text-white select-none">BLACKBLUE STUDIOS</span>
+        <!-- Minimal Header Spot -->
+        <header class="w-full max-w-6xl mx-auto px-6 pt-12 pb-6 flex justify-center items-center">
+            <div class="text-center flex flex-col items-center">
+                <div class="relative group mb-3">
+                    <!-- Subtle ambient aura behind logo -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-[25px] opacity-65 group-hover:opacity-100 transition duration-1000"></div>
+                    <!-- logo.png visual image element -->
+                    <img src="./logo.png" alt="BlackBlue Studios" class="relative h-16 md:h-22 w-auto object-contain opacity-95 filter drop-shadow-[0_0_15px_rgba(59,130,246,0.45)] group-hover:scale-[1.03] transition-all duration-300" onError="this.style.display='none'; document.getElementById('logoFallback').style.display='block';">
+                </div>
+                <!-- Sophisticated typographic fallback header -->
+                <span id="logoFallback" class="hidden text-2xl font-semibold tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-400 select-none pb-1">BLACKBLUE STUDIOS</span>
+                <!-- Constructions Status Badge -->
+                <span class="text-[9px] font-mono tracking-[0.25em] text-zinc-550/80 uppercase mt-1 animate-pulse select-none">// Still under construction</span>
             </div>
         </header>
 
         <!-- Main Body -->
-        <main class="max-w-4xl w-full mx-auto px-6 py-8 flex-grow flex flex-col justify-center">
+        <main class="max-w-6xl w-full mx-auto px-6 py-6 flex-grow flex flex-col justify-center">
             
-            <!-- Welcome Info Section -->
-            <div class="text-left mb-12">
-                <p class="text-purple-400 text-xs font-mono tracking-[0.3em] uppercase mb-3">
-                    // CORE ROSTER
-                </p>
-                <h1 class="text-3xl md:text-4xl font-light tracking-tight text-zinc-100 mb-4">
-                    The Team
-                </h1>
-                <p class="text-zinc-500 text-sm font-light max-w-lg">
-                    A collaborative network of machine learning specialists, technical creators, and virtual visualizers building future ecosystems.
-                </p>
-            </div>
-
-            <!-- Roster Control Row -->
-            <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <!-- Clean Search Input -->
-                <div class="relative w-full max-w-xs flex items-center border-b border-zinc-900 focus-within:border-purple-500/60 pb-2 transition-all duration-300">
-                    <i data-lucide="search" class="w-4 h-4 text-zinc-650 mr-2 flex-shrink-0"></i>
-                    <input type="text" id="memberSearch" placeholder="Search team member or role..." class="bg-transparent text-white placeholder-zinc-700 text-xs focus:outline-none w-full font-sans">
-                    <button id="clearSearch" class="hidden text-zinc-500 hover:text-white transition-colors">
-                        <i data-lucide="x" class="w-3.5 h-3.5"></i>
-                    </button>
-                </div>
-                <!-- Dynamic Node Tracker -->
-                <p id="counter" class="text-[10px] font-mono text-zinc-500 tracking-wider">
-                    15 OPERATIONAL MATRICES INDEXED
-                </p>
-            </div>
-
-            <!-- Unified List -->
-            <div class="border-t border-zinc-900" id="rosterList">
+            <!-- Side-by-Side Dual panel matrix layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start mt-6">
                 
-                <!-- Kerem Can -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Kerem Can Studio Lead & Head of Design">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(168,85,247,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Kerem Can
-                        </h3>
+                <!-- LEFT COLUMN (About panel + Corporate Non-profit documentation block) -->
+                <div class="lg:col-span-5 flex flex-col gap-6">
+                    
+                    <!-- Community Description Block -->
+                    <div class="text-left">
+                        <p class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 text-xs font-mono tracking-[0.3em] uppercase mb-3">
+                            // BlackBlue Studios
+                        </p>
+                        <h1 class="text-3xl md:text-4xl font-light tracking-tight text-white mb-4">
+                            About
+                        </h1>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">
+                            This is an open community of independent developers, engineers, and digital artists. This platform is built as a collaborative space where members share knowledge, provide technical support, and help each other advance their individual projects. This website does not pursue any commercial interests and serves entirely as an informational hub for our community structure.
+                        </p>
                     </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Studio Lead & Head of Design
-                    </p>
+
+                    <!-- Ambient Subtle Line -->
+                    <div class="h-[1px] w-full bg-gradient-to-r from-zinc-800/40 via-zinc-750/15 to-transparent"></div>
+
+                    <!-- Corporate Milestone Description -->
+                    <div class="text-left bg-zinc-950/40 border border-zinc-900/50 p-6 rounded-lg backdrop-blur-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-8 h-8 opacity-[0.05] border-t border-r border-white pointer-events-none"></div>
+                        
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                            <h2 class="text-[10px] font-mono text-zinc-300 tracking-[0.18em] uppercase">Foundation & Sustainability</h2>
+                        </div>
+                        <p class="text-zinc-400 text-xs font-light leading-relaxed">
+                            To ensure the long-term financial sustainability of our ecosystem and support independent creators, BlackBlue Studios has officially registered as a non-profit foundation and legal corporate entity in the United States. While we remain a collaborative community at our core, this structural milestone will soon allow us to accept global donations and grants. These resources will be fully transparent and directly utilized to fund infrastructure, host community tools, and successfully publish upcoming independent projects developed within our network.
+                        </p>
+                    </div>
+
                 </div>
 
-                <!-- Alexander Vance -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Alexander Vance Chief Technology Officer">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(59,130,246,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Alexander Vance
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Chief Technology Officer
-                    </p>
-                </div>
+                <!-- RIGHT COLUMN (Core Roster Directory - 33 Members list) -->
+                <div class="lg:col-span-7 flex flex-col">
+                    
+                    <div class="border border-zinc-900 bg-black/45 p-6 rounded-lg backdrop-blur-md">
+                        
+                        <!-- Search & Dynamic Node Tracker Bar -->
+                        <div class="mb-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-zinc-900/80 pb-5">
+                            <!-- Input -->
+                            <div class="relative w-full max-w-sm flex items-center border-b border-zinc-900 focus-within:border-purple-500/60 pb-1.5 transition-all duration-300">
+                                <i data-lucide="search" class="w-3.5 h-3.5 text-zinc-550 mr-2 flex-shrink-0"></i>
+                                <input type="text" id="memberSearch" placeholder="Filter roster by candidate..." class="bg-transparent text-white placeholder-zinc-700 text-xs focus:outline-none w-full font-sans">
+                                <button id="clearSearch" class="hidden text-zinc-500 hover:text-white transition-colors">
+                                    <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                            <!-- Counter tracker -->
+                            <p id="counter" class="text-[9px] font-mono text-zinc-500 tracking-wider flex-shrink-0">
+                                33 OPERATIONAL MATRICES INDEXED
+                            </p>
+                        </div>
 
-                <!-- Elena Rostova -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Elena Rostova Head of AI Strategy">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(168,85,247,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Elena Rostova
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Head of AI Strategy
-                    </p>
-                </div>
+                        <!-- Full Members directory list -->
+                        <div class="divide-y divide-zinc-900/45 max-h-[520px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-zinc-900 scrollbar-track-transparent" id="rosterList">
+                            
+                            <!-- 1. Kerem Can (Crown) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Kerem Can Studio Lead & Head of Design">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="crown" class="w-4 h-4 text-amber-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(251,191,36,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Kerem Can
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-amber-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Studio Lead & Head of Design
+                                </p>
+                            </div>
 
-                <!-- David Chen -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="David Chen Lead AI Architect">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 opacity-20 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(6,182,212,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            David Chen
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Lead AI Architect
-                    </p>
-                </div>
+                            <!-- 2. Alexander Vance (Crown) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Alexander Vance Chief Technology Officer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="crown" class="w-4 h-4 text-purple-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(168,85,247,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Alexander Vance
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Chief Technology Officer
+                                </p>
+                            </div>
 
-                <!-- Marcus Sterling -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Marcus Sterling Senior Machine Learning Engineer">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 opacity-20 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(6,182,212,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Marcus Sterling
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Senior Machine Learning Engineer
-                    </p>
-                </div>
+                            <!-- 3. Elena Rostova (Crown) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Elena Rostova Head of AI Strategy">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="crown" class="w-4 h-4 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Elena Rostova
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Head of AI Strategy
+                                </p>
+                            </div>
 
-                <!-- Sofia Lindqvist -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Sofia Lindqvist AI Research Engineer">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 opacity-20 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(6,182,212,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Sofia Lindqvist
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        AI Research Engineer
-                    </p>
-                </div>
+                            <!-- 4. David Goldstein (Crown) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="David Goldstein Co-Founder & Head of Operations">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="crown" class="w-4 h-4 text-purple-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(168,85,247,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        David Goldstein
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Co-Founder & Head of Operations
+                                </p>
+                            </div>
 
-                <!-- Lucas Dubois -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Lucas Dubois Full Stack Developer">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(59,130,246,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Lucas Dubois
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Full Stack Developer
-                    </p>
-                </div>
+                            <!-- 5. Sarah Jenkins (Crown) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Sarah Jenkins Co-Founder & Executive Director">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="crown" class="w-4 h-4 text-purple-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(168,85,247,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Sarah Jenkins
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Co-Founder & Executive Director
+                                </p>
+                            </div>
 
-                <!-- Amara Okafor -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Amara Okafor Lead Technical Artist">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(168,85,247,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Amara Okafor
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Lead Technical Artist
-                    </p>
-                </div>
+                            <!-- 6. Julian Vance (Crown) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Julian Vance Co-Founder & Strategic Advisor">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="crown" class="w-4 h-4 text-purple-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(168,85,247,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Julian Vance
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Co-Founder & Strategic Advisor
+                                </p>
+                            </div>
 
-                <!-- Liam Gallagher -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Liam Gallagher 3D Visualizer">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(168,85,247,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Liam Gallagher
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        3D Visualizer
-                    </p>
-                </div>
+                            <!-- 7. David Chen (Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="David Chen Lead AI Architect">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-cyan-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        David Chen
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Lead AI Architect
+                                </p>
+                            </div>
 
-                <!-- Chloe Mercer -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Chloe Mercer UI/UX Designer">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(168,85,247,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Chloe Mercer
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        UI/UX Designer
-                    </p>
-                </div>
+                            <!-- 8. Marcus Sterling (Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Marcus Sterling Senior Machine Learning Engineer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-cyan-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Marcus Sterling
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Senior ML Engineer
+                                </p>
+                            </div>
 
-                <!-- Aiden Brooks -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Aiden Brooks Prompt Engineer & AI Stylist">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 opacity-20 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(6,182,212,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Aiden Brooks
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Prompt Engineer & AI Stylist
-                    </p>
-                </div>
+                            <!-- 9. Sofia Lindqvist (Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Sofia Lindqvist AI Research Engineer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-cyan-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Sofia Lindqvist
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    AI Research Engineer
+                                </p>
+                            </div>
 
-                <!-- Zara Ahmed -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Zara Ahmed Digital Art Director">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(168,85,247,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Zara Ahmed
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Digital Art Director
-                    </p>
-                </div>
+                            <!-- 10. Noah Gallagher (Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Noah Gallagher Senior AI Engineer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-cyan-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Noah Gallagher
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Senior AI Engineer
+                                </p>
+                            </div>
 
-                <!-- Oliver Bennett -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Oliver Bennett Data Scientist">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 opacity-20 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(6,182,212,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Oliver Bennett
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        Data Scientist
-                    </p>
-                </div>
+                            <!-- 11. Emma Vance (Pen) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Emma Vance 3D Visualizer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="pen-tool" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Emma Vance
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    3D Visualizer
+                                </p>
+                            </div>
 
-                <!-- Maya Lin -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Maya Lin 3D Generalist">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(168,85,247,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Maya Lin
-                        </h3>
-                    </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        3D Generalist
-                    </p>
-                </div>
+                            <!-- 12. Lucas Dubois (Terminal) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Lucas Dubois Full Stack Developer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Lucas Dubois
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Full Stack Developer
+                                </p>
+                            </div>
 
-                <!-- Ethan Cross -->
-                <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-5 group" data-search-item="Ethan Cross DevOps Engineer">
-                    <div class="flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(59,130,246,1)] transition-all duration-300"></span>
-                        <h3 class="text-base font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
-                            Ethan Cross
-                        </h3>
+                            <!-- 13. Lucas Thorne (Terminal) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Lucas Thorne Full Stack Developer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Lucas Thorne
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Full Stack Developer
+                                </p>
+                            </div>
+
+                            <!-- 14. Amara Okafor (Pen/Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Amara Okafor Lead Technical Artist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Amara Okafor
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Lead Technical Artist
+                                </p>
+                            </div>
+
+                            <!-- 15. Liam Gallagher (Pen) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Liam Gallagher 3D Visualizer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="pen-tool" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Liam Gallagher
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    3D Visualizer
+                                </p>
+                            </div>
+
+                            <!-- 16. Chloe Mercer (Pen) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Chloe Mercer UI/UX Designer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="pen-tool" class="w-4 h-4 text-rose-405 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Chloe Mercer
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    UI/UX Designer
+                                </p>
+                            </div>
+
+                            <!-- 17. Sophia Zhang (Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Sophia Zhang AI Research Scientist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-cyan-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Sophia Zhang
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    AI Research Scientist
+                                </p>
+                            </div>
+
+                            <!-- 18. James Sterling (Pen/Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="James Sterling Lead Technical Artist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        James Sterling
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Lead Technical Artist
+                                </p>
+                            </div>
+
+                            <!-- 19. Mia Lindstrom (Pen) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Mia Lindstrom UI/UX Designer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="pen-tool" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Mia Lindstrom
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    UI/UX Designer
+                                </p>
+                            </div>
+
+                            <!-- 20. Aiden Brooks (Terminal) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Aiden Brooks Prompt Engineer & AI Stylist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-cyan-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Aiden Brooks
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Prompt Engineer & AI Stylist
+                                </p>
+                            </div>
+
+                            <!-- 21. Zara Ahmed (Pen/Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Zara Ahmed Digital Art Director">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Zara Ahmed
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Digital Art Director
+                                </p>
+                            </div>
+
+                            <!-- 22. Oliver Bennett (Terminal/Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Oliver Bennett Data Scientist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-cyan-405 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Oliver Bennett
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Data Scientist
+                                </p>
+                            </div>
+
+                            <!-- 23. Oliver Beckett (Terminal/Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Oliver Beckett Data Scientist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-cyan-405 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Oliver Beckett
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Data Scientist
+                                </p>
+                            </div>
+
+                            <!-- 24. Maya Lin (Pen) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Maya Lin 3D Generalist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="pen-tool" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Maya Lin
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    3D Generalist
+                                </p>
+                            </div>
+
+                            <!-- 25. Ethan Cross (Terminal) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Ethan Cross DevOps Engineer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Ethan Cross
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    DevOps Engineer
+                                </p>
+                            </div>
+
+                            <!-- 26. Isabella Cross (Terminal) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Isabella Cross DevOps Engineer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Isabella Cross
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    DevOps Engineer
+                                </p>
+                            </div>
+
+                            <!-- 27. Benjamin Choi (Terminal) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Benjamin Choi Prompt Engineer & AI Stylist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-cyan-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Benjamin Choi
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Prompt Engineer & AI Stylist
+                                </p>
+                            </div>
+
+                            <!-- 28. Charlotte Dubois (Pen/Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Charlotte Dubois Digital Art Director">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Charlotte Dubois
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Digital Art Director
+                                </p>
+                            </div>
+
+                            <!-- 29. Liam Mercer (Pen) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Liam Mercer 3D Generalist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="pen-tool" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Liam Mercer
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    3D Generalist
+                                </p>
+                            </div>
+
+                            <!-- 30. Amelia Rostova (Terminal) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Amelia Rostova Machine Learning Engineer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-cyan-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Amelia Rostova
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-cyan-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Machine Learning Engineer
+                                </p>
+                            </div>
+
+                            <!-- 31. Henry Chen (Terminal) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Henry Chen Cloud Infrastructure Specialist">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Henry Chen
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Cloud Infrastructure Specialist
+                                </p>
+                            </div>
+
+                            <!-- 32. Harper Vance (Pen) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Harper Vance Interaction Designer">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="pen-tool" class="w-4 h-4 text-rose-450 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(244,63,94,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Harper Vance
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-rose-450 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Interaction Designer
+                                </p>
+                            </div>
+
+                            <!-- 33. Alexander Ahmed (Terminal/Star) -->
+                            <div class="roster-row flex flex-col sm:flex-row sm:items-center justify-between py-3.5 group" data-search-item="Alexander Ahmed Systems Architect">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="star" class="w-4 h-4 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_6px_rgba(59,130,246,0.6)] transition-all"></i>
+                                    <h3 class="text-sm font-medium text-zinc-300 group-hover:text-white transition-colors duration-200">
+                                        Alexander Ahmed
+                                    </h3>
+                                </div>
+                                <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
+                                    Systems Architect
+                                </p>
+                            </div>
+
+                        </div>
                     </div>
-                    <p class="text-xs font-mono text-zinc-400 group-hover:text-blue-400 transition-colors duration-200 mt-1 sm:mt-0 tracking-wide">
-                        DevOps Engineer
-                    </p>
+
                 </div>
 
             </div>
@@ -326,51 +599,43 @@
         </main>
 
         <!-- Footer -->
-        <footer class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-center text-xs text-zinc-650 mt-12 border-t border-zinc-950/40">
+        <footer class="w-full max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-center text-xs text-zinc-600 mt-12 border-t border-zinc-950/40">
             <p>&copy; 2026 BlackBlue Studios. All rights reserved.</p>
-            <p class="mt-2 sm:mt-0 font-mono tracking-widest uppercase text-zinc-700">Cognitive Production Matrix</p>
+            <p class="mt-2 sm:mt-0 font-mono tracking-widest uppercase text-zinc-750">Cognitive Production Matrix</p>
         </footer>
 
     </div>
 
-    <!-- Parallax Mouse Trigger & Interface Filtering script -->
+    <!-- Parallax Mouse Drift Drift & Interactive Search script logic -->
     <script>
-        // Init icons seamlessly
+        // Initialize dynamic Lucide indicators beautifully
         lucide.createIcons();
 
-        // Parallax script using requestAnimationFrame for 60fps+ smooth rendering
+        // High-fidelity silky smooth parallax handler on requestAnimationFrame
         const targetBg = document.getElementById('parallaxBg');
         let currentX = 0, currentY = 0;
         let targetX = 0, targetY = 0;
-
-        // Smooth interpolation constant
         const easeAmount = 0.08;
 
         window.addEventListener('mousemove', (e) => {
-            // Get percentage of mouse displacement on screen from center
             const xOffset = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
             const yOffset = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
             
-            // Limit shifting magnitude to 18px to maintain perfect elegant look without screen edge exposure
-            targetX = xOffset * 18;
-            targetY = yOffset * 18;
+            // Subtle 15px bounding range for ideal immersive experience without hard edges
+            targetX = xOffset * 15;
+            targetY = yOffset * 15;
         });
 
-        function animateParallax() {
-            // Linear interpolation calculation
+        function renderParallax() {
             currentX += (targetX - currentX) * easeAmount;
             currentY += (targetY - currentY) * easeAmount;
             
-            // Assign translate positions with small subtle zoom to prevent boundary leakage
-            targetBg.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.05)`;
-            
-            requestAnimationFrame(animateParallax);
+            targetBg.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.04)`;
+            requestAnimationFrame(renderParallax);
         }
-        // Start rendering cycle
-        animateParallax();
+        renderParallax();
 
-
-        // Search controller in plain JS
+        // Search panel filtering actions
         const searchInput = document.getElementById('memberSearch');
         const clearBtn = document.getElementById('clearSearch');
         const rows = document.querySelectorAll('.roster-row');
@@ -378,7 +643,7 @@
 
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
-            let matchedCount = 0;
+            let visibleCount = 0;
 
             if (query.length > 0) {
                 clearBtn.classList.remove('hidden');
@@ -387,25 +652,25 @@
             }
 
             rows.forEach(row => {
-                const textData = row.getAttribute('data-search-item').toLowerCase();
-                if (textData.includes(query)) {
-                    row.style.display = 'flex';
-                    matchedCount++;
+                const searchItem = row.getAttribute('data-search-item').toLowerCase();
+                if (searchItem.includes(query)) {
+                    row.style.setProperty('display', 'flex', 'important');
+                    visibleCount++;
                 } else {
-                    row.style.display = 'none';
+                    row.style.setProperty('display', 'none', 'important');
                 }
             });
 
-            counter.textContent = `${matchedCount} MATRICES MATCHED`;
+            counter.textContent = `${visibleCount} OPERATIONAL MATRICES MATCHED`;
         });
 
         clearBtn.addEventListener('click', () => {
             searchInput.value = '';
             clearBtn.classList.add('hidden');
             rows.forEach(row => {
-                row.style.display = 'flex';
+                row.style.setProperty('display', 'flex', 'important');
             });
-            counter.textContent = `15 OPERATIONAL MATRICES INDEXED`;
+            counter.textContent = `33 OPERATIONAL MATRICES INDEXED`;
         });
     </script>
 </body>
